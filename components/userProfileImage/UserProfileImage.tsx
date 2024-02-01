@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {View, Image} from 'react-native';
-import style from '../userStory/style';
+import style from './style';
 
 interface UserProfileImageProps {
   profileImage: any;
