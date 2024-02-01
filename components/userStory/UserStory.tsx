@@ -13,7 +13,7 @@ const UserStory: FC<UserStoryProps> = ({firstName, profileImage}) => {
   return (
     <View style={style.storyContainer}>
       <TouchableOpacity onPress={handlePress}>
-        <UserProfileImage profileImage={profileImage} />
+        <UserProfileImage profileImage={profileImage} dimention={52} />
         <Text style={style.firstName}>{firstName}</Text>
       </TouchableOpacity>
     </View>

@@ -5,11 +5,6 @@ const style = StyleSheet.create({
     borderColor: '#F35BAC',
     borderWidth: 1,
     padding: 3,
-    borderRadius: 50,
-  },
-  image: {
-    width: 55,
-    height: 55,
   },
 });
 

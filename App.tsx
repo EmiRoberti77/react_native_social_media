@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -60,6 +60,40 @@ function App() {
       profileImage: require('./assets/images/default_profile.png'),
     },
   ];
+
+  const [pageLength] = useState(4);
+  const [userStoriesCurrentPage, setUserStorieCurrentPage] =
+    useState<number>(1);
+
+  const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<any[]>(
+    [],
+  );
+
+  const [isLoadingUserStories, setIsLoadingUserStories] =
+    useState<boolean>(false);
+
+  const pagination = (
+    database: any[],
+    currentPage: number,
+    pageSize: number,
+  ) => {
+    const startingIndex = (currentPage - 1) * pageSize;
+    const endIndex = startingIndex + pageSize;
+    if (startingIndex >= database.length) {
+      return [];
+    }
+    return database.slice(startingIndex, endIndex);
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+    console.log('currentPage if useEffecr', userStoriesCurrentPage);
+    setIsLoadingUserStories(true);
+    setUserStoriesRenderedData(
+      pagination(userStories, userStoriesCurrentPage, pageLength),
+    );
+    setIsLoadingUserStories(false);
+  }, []);
   return (
     <SafeAreaView>
       <View style={globalStyles.header}>
@@ -73,9 +107,34 @@ function App() {
       </View>
       <View style={globalStyles.userStoryContainer}>
         <FlatList
+          // onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            if (isLoadingUserStories) {
+              return;
+            }
+            setIsLoadingUserStories(true);
+            const newPage = userStoriesCurrentPage + 1;
+            console.log(
+              'currentPage',
+              userStoriesCurrentPage,
+              'newPage',
+              newPage,
+            );
+            const contentToAppend = pagination(
+              userStories,
+              newPage,
+              pageLength,
+            );
+
+            if (contentToAppend.length > 0) {
+              setUserStorieCurrentPage(newPage);
+              setUserStoriesRenderedData(prev => [...prev, ...contentToAppend]);
+            }
+            setIsLoadingUserStories(false);
+          }}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={userStories}
+          data={userStoriesRenderedData}
           renderItem={({item}) => {
             return (
               <UserStory

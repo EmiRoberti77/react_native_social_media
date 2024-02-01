@@ -4,12 +4,19 @@ import style from './style';
 
 interface UserProfileImageProps {
   profileImage: any;
+  dimention: number;
 }
 
-const UserProfileImage: FC<UserProfileImageProps> = ({profileImage}) => {
+const UserProfileImage: FC<UserProfileImageProps> = ({
+  profileImage,
+  dimention,
+}) => {
   return (
-    <View style={style.borderImageContainer}>
-      <Image style={style.image} source={profileImage} />
+    <View style={[style.borderImageContainer, {borderRadius: dimention}]}>
+      <Image
+        style={{width: dimention, height: dimention}}
+        source={profileImage}
+      />
     </View>
   );
 };
