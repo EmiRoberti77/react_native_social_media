@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {View, Image, Text, TouchableOpacity, Alert} from 'react-native';
 import style from './style';
+import UserProfileImage from '../userProfileImage/UserProfileImage';
 interface UserStoryProps {
   firstName: string;
   profileImage: any;
@@ -12,9 +13,7 @@ const UserStory: FC<UserStoryProps> = ({firstName, profileImage}) => {
   return (
     <View style={style.storyContainer}>
       <TouchableOpacity onPress={handlePress}>
-        <View style={style.borderImageContainer}>
-          <Image style={style.image} source={profileImage} />
-        </View>
+        <UserProfileImage profileImage={profileImage} />
         <Text style={style.firstName}>{firstName}</Text>
       </TouchableOpacity>
     </View>
