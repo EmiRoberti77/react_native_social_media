@@ -57,13 +57,19 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('useEffect');
-    console.log('currentPage if useEffecr', userStoriesCurrentPage);
+    //loading user stories
     setIsLoadingUserStories(true);
     setUserStoriesRenderedData(
       pagination(userStories, userStoriesCurrentPage, pageLength),
     );
     setIsLoadingUserStories(false);
+
+    //loading user posts
+    setIsLoadingPosts(true);
+    setPostsRenderedData(
+      postsPaginaton(userPosts, postCurrentPage, postsLength),
+    );
+    setIsLoadingPosts(false);
   }, []);
   return (
     <SafeAreaView>
@@ -89,12 +95,6 @@ function App() {
                     }
                     setIsLoadingUserStories(true);
                     const newPage = userStoriesCurrentPage + 1;
-                    console.log(
-                      'currentPage',
-                      userStoriesCurrentPage,
-                      'newPage',
-                      newPage,
-                    );
                     const contentToAppend = pagination(
                       userStories,
                       newPage,
@@ -127,7 +127,24 @@ function App() {
             </>
           }
           showsVerticalScrollIndicator={false}
-          data={userPosts}
+          data={postsRenderedData}
+          onEndReached={() => {
+            console.log(
+              'userposts reached end event, get new posts if avaliable',
+            );
+
+            if (isLoadingPosts) {
+              return;
+            }
+            const newPage = postCurrentPage + 1;
+            const contentToAppend = pagination(userPosts, newPage, postsLength);
+            if (contentToAppend.length > 0) {
+              setPostCurrentPage(newPage);
+              setIsLoadingPosts(true);
+              setPostsRenderedData(prev => [...prev, ...contentToAppend]);
+              setIsLoadingPosts(false);
+            }
+          }}
           renderItem={({item}) => {
             return <UserPost key={'post' + item.id} post={item} />;
           }}
