@@ -23,6 +23,17 @@ const style = StyleSheet.create({
     fontFamily: getFontFamily('Inter', '400'),
     fontSize: 12,
   },
+  postImage: {
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  postInsightContainer: {
+    marginLeft: 10,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    padding: 10,
+    borderBottomColor: '#EFF2F6',
+  },
 });
 
 export default style;

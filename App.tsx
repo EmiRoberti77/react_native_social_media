@@ -67,58 +67,66 @@ function App() {
   }, []);
   return (
     <SafeAreaView>
-      <View style={globalStyles.header}>
-        <Title title="Let’s Explore " />
-        <TouchableOpacity style={globalStyles.messageIcon}>
-          <FontAwesomeIcon icon={faEnvelope} size={20} color={'gray'} />
-          <View style={globalStyles.messageIconContainer}>
-            <Text>2</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={globalStyles.userStoryContainer}>
-        <FlatList
-          // onEndReachedThreshold={0.5}
-          onEndReached={() => {
-            if (isLoadingUserStories) {
-              return;
-            }
-            setIsLoadingUserStories(true);
-            const newPage = userStoriesCurrentPage + 1;
-            console.log(
-              'currentPage',
-              userStoriesCurrentPage,
-              'newPage',
-              newPage,
-            );
-            const contentToAppend = pagination(
-              userStories,
-              newPage,
-              pageLength,
-            );
-
-            if (contentToAppend.length > 0) {
-              setUserStorieCurrentPage(newPage);
-              setUserStoriesRenderedData(prev => [...prev, ...contentToAppend]);
-            }
-            setIsLoadingUserStories(false);
-          }}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          data={userStoriesRenderedData}
-          renderItem={({item}) => {
-            return (
-              <UserStory
-                key={'userstory' + item.id}
-                firstName={item.firstName}
-                profileImage={item.profileImage}
-              />
-            );
-          }}
-        />
-      </View>
       <View style={globalStyles.userPostContainer}>
         <FlatList
+          ListHeaderComponent={
+            <>
+              <View style={globalStyles.header}>
+                <Title title="Let’s Explore " />
+                <TouchableOpacity style={globalStyles.messageIcon}>
+                  <FontAwesomeIcon icon={faEnvelope} size={20} color={'gray'} />
+                  <View style={globalStyles.messageIconContainer}>
+                    <Text>2</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View style={globalStyles.userStoryContainer}>
+                <FlatList
+                  // onEndReachedThreshold={0.5}
+                  onEndReached={() => {
+                    if (isLoadingUserStories) {
+                      return;
+                    }
+                    setIsLoadingUserStories(true);
+                    const newPage = userStoriesCurrentPage + 1;
+                    console.log(
+                      'currentPage',
+                      userStoriesCurrentPage,
+                      'newPage',
+                      newPage,
+                    );
+                    const contentToAppend = pagination(
+                      userStories,
+                      newPage,
+                      pageLength,
+                    );
+
+                    if (contentToAppend.length > 0) {
+                      setUserStorieCurrentPage(newPage);
+                      setUserStoriesRenderedData(prev => [
+                        ...prev,
+                        ...contentToAppend,
+                      ]);
+                    }
+                    setIsLoadingUserStories(false);
+                  }}
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={userStoriesRenderedData}
+                  renderItem={({item}) => {
+                    return (
+                      <UserStory
+                        key={'userstory' + item.id}
+                        firstName={item.firstName}
+                        profileImage={item.profileImage}
+                      />
+                    );
+                  }}
+                />
+              </View>
+            </>
+          }
+          showsVerticalScrollIndicator={false}
           data={userPosts}
           renderItem={({item}) => {
             return <UserPost key={'post' + item.id} post={item} />;

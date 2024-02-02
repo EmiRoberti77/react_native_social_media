@@ -1,18 +1,32 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import {Post} from '../../data/models';
 import UserProfileImage from '../userProfileImage/UserProfileImage';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBaby,
+  faBookBookmark,
+  faEllipsisH,
+} from '@fortawesome/free-solid-svg-icons';
 import style from './style';
+import {faComment, faHeart} from '@fortawesome/free-regular-svg-icons';
 
 interface UserPostProp {
   post: Post;
 }
 
 const UserPost: FC<UserPostProp> = ({post}) => {
-  const {firstName, lastName, profileImage, location} = post;
+  const {
+    firstName,
+    lastName,
+    profileImage,
+    location,
+    image,
+    likes,
+    comments,
+    bookmarks,
+  } = post;
   return (
     <View>
       <View style={style.userContainer}>
@@ -34,7 +48,24 @@ const UserPost: FC<UserPostProp> = ({post}) => {
             alignItems: 'flex-end',
             marginTop: 10,
           }}>
-          <FontAwesomeIcon icon={faEllipsisH} />
+          <FontAwesomeIcon icon={faEllipsisH} size={24} />
+        </View>
+      </View>
+      <View style={style.postImage}>
+        <Image source={image} />
+      </View>
+      <View style={style.postInsightContainer}>
+        <View style={{flexDirection: 'row'}}>
+          <FontAwesomeIcon icon={faHeart} color="#79869F" />
+          <Text style={{marginLeft: 3, color: '#79869F'}}>{likes}</Text>
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: 27}}>
+          <FontAwesomeIcon icon={faComment} color="#79869F" />
+          <Text style={{marginLeft: 3, color: '#79869F'}}>{comments}</Text>
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: 27}}>
+          <FontAwesomeIcon icon={faBookBookmark} color="#79869F" />
+          <Text style={{marginLeft: 3, color: '#79869F'}}>{bookmarks}</Text>
         </View>
       </View>
     </View>
