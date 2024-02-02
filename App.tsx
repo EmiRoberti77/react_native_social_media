@@ -129,9 +129,7 @@ function App() {
           showsVerticalScrollIndicator={false}
           data={postsRenderedData}
           onEndReached={() => {
-            console.log(
-              'userposts reached end event, get new posts if avaliable',
-            );
+            console.log('userposts reached end event, get new postsgs');
 
             if (isLoadingPosts) {
               return;
