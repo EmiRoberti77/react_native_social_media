@@ -11,66 +11,24 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import globalStyles from './assets/styles/globalStyles';
 import UserStory from './components/userStory/UserStory';
+import {userPosts, userStories} from './data/data';
+import UserPost from './components/userPost/UserPost';
+import {Post} from './data/models/models.ts';
 
 function App() {
-  const userStories = [
-    {
-      firstName: 'Joseph',
-      id: 1,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Angel',
-      id: 2,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Nicolas',
-      id: 3,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Maria',
-      id: 4,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Adam',
-      id: 5,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Kate',
-      id: 6,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Kelly',
-      id: 7,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Emily',
-      id: 8,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-    {
-      firstName: 'Emi',
-      id: 9,
-      profileImage: require('./assets/images/default_profile.png'),
-    },
-  ];
-
+  //create useState for userStories
   const [pageLength] = useState(4);
-  const [userStoriesCurrentPage, setUserStorieCurrentPage] =
-    useState<number>(1);
-
+  const [userStoriesCurrentPage, setUserStorieCurrentPage] = useState(1);
+  const [isLoadingUserStories, setIsLoadingUserStories] = useState(false);
   const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<any[]>(
     [],
   );
 
-  const [isLoadingUserStories, setIsLoadingUserStories] =
-    useState<boolean>(false);
+  //create useStates for postsFeeds
+  const [postsLength] = useState(2);
+  const [postCurrentPage, setPostCurrentPage] = useState(1);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
+  const [postsRenderedData, setPostsRenderedData] = useState<any[]>([]);
 
   const pagination = (
     database: any[],
@@ -83,6 +41,19 @@ function App() {
       return [];
     }
     return database.slice(startingIndex, endIndex);
+  };
+
+  const postsPaginaton = (
+    database: any[],
+    currentPage: number,
+    pageSize: number,
+  ) => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    if (startIndex >= database.length) {
+      return [];
+    }
+    return database.slice(startIndex, endIndex);
   };
 
   useEffect(() => {
@@ -138,10 +109,19 @@ function App() {
           renderItem={({item}) => {
             return (
               <UserStory
+                key={'userstory' + item.id}
                 firstName={item.firstName}
                 profileImage={item.profileImage}
               />
             );
+          }}
+        />
+      </View>
+      <View style={globalStyles.userPostContainer}>
+        <FlatList
+          data={userPosts}
+          renderItem={({item}) => {
+            return <UserPost key={'post' + item.id} post={item} />;
           }}
         />
       </View>

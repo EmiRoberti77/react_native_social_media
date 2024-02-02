@@ -36,6 +36,9 @@ const globalStyles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 28,
   },
+  userPostContainer: {
+    marginHorizontal: 24,
+  },
 });
 
 export default globalStyles;

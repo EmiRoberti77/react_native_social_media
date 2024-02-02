@@ -1,0 +1,106 @@
+import {Post, User} from './models';
+
+export const userStories: User[] = [
+  {
+    firstName: 'Joseph',
+    id: 1,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Angel',
+    id: 2,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Nicolas',
+    id: 3,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Maria',
+    id: 4,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Adam',
+    id: 5,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Kate',
+    id: 6,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Kelly',
+    id: 7,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Emily',
+    id: 8,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Emi',
+    id: 9,
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+];
+export const userPosts: Post[] = [
+  {
+    firstName: 'Allison',
+    lastName: 'Becker',
+    location: 'Boston, MA',
+    likes: 1201,
+    comments: 24,
+    bookmarks: 55,
+    id: 1,
+    image: require('../assets/images/default_post.png'),
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Jennifer',
+    lastName: 'Wilson',
+    location: 'Pondok Leugsur, Jawa Barat',
+    likes: 800,
+    comments: 21,
+    bookmarks: 5,
+    id: 2,
+    image: require('../assets/images/default_post.png'),
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Mark',
+    lastName: 'Jeffs',
+    location: 'Los Angeles, LA',
+    likes: 1201,
+    comments: 334,
+    bookmarks: 54,
+    id: 3,
+    image: require('../assets/images/default_post.png'),
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Peter',
+    lastName: 'Smith',
+    location: 'London, UK',
+    likes: 23445,
+    comments: 344,
+    bookmarks: 545,
+    id: 4,
+    image: require('../assets/images/default_post.png'),
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+  {
+    firstName: 'Claire',
+    lastName: 'Jilles',
+    location: 'Montreal, CA',
+    likes: 4567,
+    comments: 890,
+    bookmarks: 67,
+    id: 5,
+    image: require('../assets/images/default_post.png'),
+    profileImage: require('../assets/images/default_profile.png'),
+  },
+];
