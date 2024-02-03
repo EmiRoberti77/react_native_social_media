@@ -87,16 +87,6 @@ function App() {
   }, []);
   return (
     <SafeAreaView>
-      <View
-        style={{
-          height: screenData.height / 2,
-          width: screenData.width / 2,
-          backgroundColor: 'red',
-        }}>
-        <Text>
-          this text will be half the height and half the width of the screen
-        </Text>
-      </View>
       <View style={globalStyles.userPostContainer}>
         <FlatList
           ListHeaderComponent={

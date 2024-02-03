@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getFontFamily} from '../../assets/fonts/helper';
+import {scaleFontSize} from '../../assets/styles/scaling';
 
 const style = StyleSheet.create({
   userContainer: {
@@ -21,7 +22,7 @@ const style = StyleSheet.create({
   location: {
     color: '#79869F',
     fontFamily: getFontFamily('Inter', '400'),
-    fontSize: 12,
+    fontSize: scaleFontSize(12),
   },
   postImage: {
     alignItems: 'center',
