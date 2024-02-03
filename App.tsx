@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from 'react-native';
 import Title from './components/Title/Title';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -13,9 +14,9 @@ import globalStyles from './assets/styles/globalStyles';
 import UserStory from './components/userStory/UserStory';
 import {userPosts, userStories} from './data/data';
 import UserPost from './components/userPost/UserPost';
-import {Post} from './data/models/models.ts';
 
 function App() {
+  const [count, setCount] = useState(0);
   //create useState for userStories
   const [pageLength] = useState(4);
   const [userStoriesCurrentPage, setUserStorieCurrentPage] = useState(1);
@@ -29,6 +30,7 @@ function App() {
   const [postCurrentPage, setPostCurrentPage] = useState(1);
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   const [postsRenderedData, setPostsRenderedData] = useState<any[]>([]);
+  const [screenData, setScreenData] = useState(Dimensions.get('screen'));
 
   const pagination = (
     database: any[],
@@ -57,6 +59,9 @@ function App() {
   };
 
   useEffect(() => {
+    setCount(prev => prev + 1);
+    console.log('useEffect:', count);
+    console.log(screenData);
     //loading user stories
     setIsLoadingUserStories(true);
     setUserStoriesRenderedData(
@@ -70,9 +75,28 @@ function App() {
       postsPaginaton(userPosts, postCurrentPage, postsLength),
     );
     setIsLoadingPosts(false);
+
+    const subscription = Dimensions.addEventListener(
+      'change',
+      ({window, screen}) => {
+        console.log(window, screen);
+        setScreenData(screen);
+      },
+    );
+    return () => subscription?.remove();
   }, []);
   return (
     <SafeAreaView>
+      <View
+        style={{
+          height: screenData.height / 2,
+          width: screenData.width / 2,
+          backgroundColor: 'red',
+        }}>
+        <Text>
+          this text will be half the height and half the width of the screen
+        </Text>
+      </View>
       <View style={globalStyles.userPostContainer}>
         <FlatList
           ListHeaderComponent={
