@@ -1,5 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {getFontFamily} from '../../assets/fonts/helper';
+import {
+  horizontalScale,
+  scaleFontSize,
+  verticalScale,
+} from '../../assets/styles/scaling';
 
 const style = StyleSheet.create({
   userContainer: {
@@ -21,14 +26,14 @@ const style = StyleSheet.create({
   location: {
     color: '#79869F',
     fontFamily: getFontFamily('Inter', '400'),
-    fontSize: 12,
+    fontSize: scaleFontSize(12),
   },
   postImage: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: verticalScale(20),
   },
   postInsightContainer: {
-    marginLeft: 10,
+    marginLeft: horizontalScale(10),
     flexDirection: 'row',
     borderBottomWidth: 1,
     padding: 10,

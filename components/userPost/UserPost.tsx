@@ -4,11 +4,7 @@ import {Text, View, Image} from 'react-native';
 import {Post} from '../../data/models';
 import UserProfileImage from '../userProfileImage/UserProfileImage';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faBaby,
-  faBookBookmark,
-  faEllipsisH,
-} from '@fortawesome/free-solid-svg-icons';
+import {faBookBookmark, faEllipsisH} from '@fortawesome/free-solid-svg-icons';
 import style from './style';
 import {faComment, faHeart} from '@fortawesome/free-regular-svg-icons';
 
